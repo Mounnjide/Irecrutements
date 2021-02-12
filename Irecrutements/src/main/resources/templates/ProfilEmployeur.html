@@ -1,0 +1,336 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template1">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+	name='viewport' />
+
+<title>Tableau de bord</title>
+
+
+<link rel="icon" type="image/png"
+	href="assets/img/logoIrecrutements.png" />
+
+
+<style type="text/css">
+.image-upload>input {
+	display: none;
+}
+</style>
+</head>
+
+<body class="profile-page">
+
+	<section layout:fragment="content">
+		<div class="wrapper">
+			<div class="header header-filter"
+				style="background-image: url('assets/img/bg5.jpg');"></div>
+			<div class="main main-raised">
+				<div class="profile-content">
+					<div class="container">
+						<div class="row">
+
+							<div class="profile">
+								<div class="avatar">
+									<form method="POST" th:action="@{saveProfilImg}"
+										enctype="multipart/form-data">
+										<div class="image-upload">
+											<label for="file-input"> <a rel="tooltip"
+												title="Choisir un Logo de l'entreprise" data-placement="bottom"
+												class="btn btn-white btn-simple btn-just-icon"> <img
+													id="your_image" th:src="@{/imageProfil}" alt="Circle Image"
+													class="img-circle img-responsive img-raised" />
+											</a>
+											</label>
+											<div th:if="${imgEmpty != ''}">
+												<span class="label label-warning" th:text="${imgEmpty}"></span>
+											</div>
+											<input id="file-input" name="profilImg" type="file"
+												accept="image/*"
+												onchange="document.getElementById('your_image').src = window.URL.createObjectURL(this.files[0])" />
+										</div>
+										<button type="submit" class="btn btn-primary">Enregistrer la photo</button>
+									</form>
+								</div>
+								<div class="name">
+									<h1
+										th:text="${'Employeur ' + employeur.nomUtilisateur + ' ' + employeur.prenomUtilisateur} "></h1>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+							<div class="row sharing-area text-center">
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">face</i>
+		                        <p th:text="${employeur.civiliteUtilisateur + ' ' + employeur.nomUtilisateur + ' ' + employeur.prenomUtilisateur}" class="text-info"></p>
+		                    	</span>
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">email</i>
+		                        <p th:text="${employeur.emailUtilisateur}" class="text-info"></p>
+		                    	</span> 
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">explore</i>
+		                        <p th:text="${employeur.adresse}" class="text-info"></p>
+		                    	</span> 
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">date_range</i>
+		                        <p th:text="${employeur.telephone}" class="text-info"></p>
+		                    	</span>
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">school</i>
+		                        <p th:text="${employeur.infoEntreprise}" class="text-info"></p>
+		                    	</span>
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">school</i>
+		                        <p th:text="${employeur.siteWeb}" class="text-info"></p>
+		                    	</span>
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">school</i>
+		                        <p th:text="${employeur.facebookEntreprise}" class="text-info"></p>
+		                    	</span>
+		                        <span class="input-group-addon"> 
+								<i class="material-icons">school</i>
+		                        <p th:text="${employeur.linkedinEntreprise}" class="text-info"></p>
+		                    	</span>
+		                    	</div>
+							</div>
+							<div class="container-fluid text-center">
+								<div sec:authorize="isAuthenticated()">
+									<a href="editProfil" rel="tooltip" title="Acceder au informations pour les modifier" data-placement="top" style="cursor:pointer">
+										<button type="submit" class="btn btn-primary">Modifier mes informations personnelles</button>
+									</a>
+								</div>
+							</div>
+							<div class="container-fluid text-center">
+								<div sec:authorize="isAuthenticated()">
+									<a href="ajouterOffre" rel="tooltip" title="Ajouter une demande de stage ou d'embauche" data-placement="top" style="cursor:pointer">
+										<button type="submit" class="btn btn-primary">Ajouter une offre</button>
+									</a>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+<!-- 							<div class="col-md-6 col-md-offset-3"> -->
+							<div class="col-md-10 col-md-offset-1">
+								<div class="profile-tabs">
+				                    <div class="nav-align-center">
+										<ul class="nav nav-pills" role="tablist">
+											<li class="active">
+												<a href="#studio" role="tab" data-toggle="tab">
+													<i class="material-icons">book</i>
+													Mes offres
+												</a>
+											</li>
+											<li>
+					                            <a href="#work" role="tab" data-toggle="tab">
+													<i class="material-icons">favorite</i>
+					                                Candidature favoris
+					                            </a>
+					                        </li>
+					                        <li>
+					                            <a href="#shows" role="tab" data-toggle="tab">
+													<i class="material-icons">palette</i>
+													Les candidatures demander
+					                            </a>
+					                        </li>
+					                    </ul>
+	
+					                    <div class="tab-content gallery">
+											<div class="tab-pane active" id="studio">
+					                            <div class="row">
+													<div class="col-md-12">
+														<table class="table">
+														    <thead>
+														        <tr>
+														            <th class="text-center">Titre de l'offre</th>
+														            <th class="text-center">Type de l'offre</th>
+														            <th class="text-center">Experience requise</th>
+														            <th class="text-center">Domaines</th>
+														            <th class="text-center">Ville</th>
+														            <th class="text-right">Actions</th>
+														        </tr>
+														    </thead>
+														    <tbody>
+														        <tr th:each="offre : ${employeur.offres}">
+														            <td class="text-center" th:text="${offre.intituleOffre}"></td>
+														            <td class="text-center" th:text="${offre.typeOffre}"></td>
+														            <td class="text-center" th:text="${offre.experienceRequise}"></td>
+														            <td class="text-center" th:text="${offre.domainesToString()}"></td>
+														            <td class="text-center" th:text="${offre.villeOffre.nomVille}"></td>
+														            <td class="td-actions text-right">
+														            	<div class="row">
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Consulter l'offre" data-placement="bottom" style="cursor:pointer" th:href="@{/consulterOffre(id=${offre.idOffre})}">
+																					<i class="fa fa-user"></i>
+																				</a>
+																		    </div>
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Modifier l'offre" data-placement="bottom" style="cursor:pointer" th:href="@{/EditOffre(id=${offre.idOffre})}">
+																					<i class="fa fa-edit"></i>
+																				</a>
+																		    </div>
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Supprimer la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/SupprimerOffre(id=${offre.idOffre})}">
+																					<i class="fa fa-times"></i>
+																				</a>
+																			</div>
+																		</div>
+														            </td>
+														        </tr>
+														    </tbody>
+														</table>
+													</div>
+					                            </div>
+					                        </div>
+					                        <div class="tab-pane text-center" id="work">
+												<div class="row">
+													<div class="col-md-12">
+														<table class="table">
+														    <thead>
+														        <tr>
+														            <th class="text-center">Titre de la candidature</th>
+														            <th class="text-center">Type de la candidature</th>
+														            <th class="text-center">Domaines</th>
+														            <th class="text-center">Ville</th>
+														            <th class="text-center">Etat de la candidature</th>
+														            <th class="text-right">Actions</th>
+														        </tr>
+														    </thead>
+														    <tbody>
+														        <tr th:if="${employeur.candidatureInteressantes} != null" th:each="candidature : ${employeur.candidatureInteressantes}">
+														            <td class="text-center" th:text="${candidature.intituleCandidature}"></td>
+														            <td class="text-center" th:text="${candidature.typeCandidature}"></td>
+														            <td class="text-center" th:text="${candidature.domainesToString()}"></td>
+														            <td class="text-center" th:text="${candidature.villeCandidature.nomVille}"></td>
+														            <td class="text-center" th:text="${candidature.etatCandidature}"></td>
+														            <td class="td-actions text-right">
+														            	<div class="row">
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Consulter la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/voirCandidature(id=${candidature.idCandidature})}">
+																					<i class="fa fa-user"></i>
+																				</a>
+																		    </div>
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Modifier l'etat de la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/etatCandidature(id=${candidature.idCandidature})}">
+																					<i class="fa fa-edit"></i>
+																				</a>
+																		    </div>
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Supprimer l'offre" data-placement="bottom" style="cursor:pointer" th:href="@{/supprimerCandidatureInteressante(id=${candidature.idCandidature})}">
+																					<i class="fa fa-times"></i>
+																				</a>
+																			</div>
+																		</div>
+														            </td>
+														        </tr>
+														    </tbody>
+														</table>
+													</div>
+												</div>
+					                        </div>
+											<div class="tab-pane text-center" id="shows">
+												<div class="row">
+													<div class="col-md-12">
+														<table class="table">
+														    <thead>
+														        <tr>
+														            <th class="text-center">Titre de l'offre</th>
+														            <th class="text-center">Domaines</th>
+														            <th class="text-center">Ville</th>
+														            <th class="text-center">Nom du candidat</th>
+														            <th class="text-center">Prénom du candidat</th>
+														            <th class="text-center">Etat de la candidature</th>
+														            <th class="text-right">Actions</th>
+														        </tr>
+														    </thead>
+														    <tbody>
+														        <tr th:each="demande : ${demandes}">
+														            <td class="text-center" th:text="${demande.value.intituleCandidature}"></td>
+														            <td class="text-center" th:text="${demande.value.domainesToString()}"></td>
+														            <td class="text-center" th:text="${demande.value.villeCandidature.nomVille}"></td>
+														            <td class="text-center" th:text="${demande.key.nomUtilisateur}"></td>
+														            <td class="text-center" th:text="${demande.key.prenomUtilisateur}"></td>
+														            <td class="text-center" th:text="${demande.value.etatCandidature}"></td>
+														            <td class="td-actions text-right">
+														            	<div class="row">
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Consulter la demande" data-placement="bottom" style="cursor:pointer" th:href="@{/voirCandidature(id=${demande.value.idCandidature})}">
+																					<i class="fa fa-user"></i>
+																				</a>
+																		    </div>
+																		    <div class="col-md-3">
+															               		<a rel="tooltip" title="Modifier l'etat de la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/etatCandidature(id=${demande.value.idCandidature})}">
+																					<i class="fa fa-edit"></i>
+																				</a>
+																		    </div>
+<!-- 																		    <div class="col-md-3"> -->
+<!-- 															               		<a rel="tooltip" title="Supprimer la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/SupprimerOffre(id=${offre.idOffre})}"> -->
+<!-- 																					<i class="fa fa-times"></i> -->
+<!-- 																				</a> -->
+<!-- 																			</div> -->
+																		</div>
+														            </td>
+														        </tr>
+														    </tbody>
+														</table>
+													</div>
+					                            </div>
+					                        </div>
+	
+					                    </div>
+									</div>
+								</div>
+								<!-- End Profile Tabs -->
+							</div>
+	                	</div>
+					</div>
+				</div>
+			</div>
+
+			<section layout:fragment="footer">
+
+				<footer class="footer">
+					<div class="container">
+						<!-- 				        <nav class="pull-left"> -->
+						<!-- 				            <ul> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://www.creative-tim.com"> -->
+						<!-- 										Creative Tim -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://presentation.creative-tim.com"> -->
+						<!-- 									   About Us -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://blog.creative-tim.com"> -->
+						<!-- 									   Blog -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://www.creative-tim.com/license"> -->
+						<!-- 										Licenses -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 				            </ul> -->
+						<!-- 				        </nav> -->
+						<div class="copyright pull-right">
+							&copy; IRECRUTEMENTS — TOUS DROITS RÉSERVÉS, made with <i
+								class="material-icons">favorite</i> by EDDAHBANI Zakariae and EL
+							MOUNJIDE Hamza.
+						</div>
+					</div>
+				</footer>
+			</section>
+		</div>
+	</section>
+</body>
+
+</html>

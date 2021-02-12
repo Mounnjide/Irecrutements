@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Irecrutements</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+<!--         <property name="hibernate.hbm2ddl.auto">create</property> -->
+<!--         <property name="hibernate.hbm2ddl.auto">update</property> -->
+        
+        
+        <mapping class="com.irecrutements.spring.models.Candidat"/>
+        <mapping class="com.irecrutements.spring.models.Candidature"/>
+        <mapping class="com.irecrutements.spring.models.Document"/>
+        <mapping class="com.irecrutements.spring.models.Domaine"/>
+        <mapping class="com.irecrutements.spring.models.Employeur"/>
+        <mapping class="com.irecrutements.spring.models.Offre"/>
+        <mapping class="com.irecrutements.spring.models.Remarque"/>
+        <mapping class="com.irecrutements.spring.models.Utilisateur"/>
+        <mapping class="com.irecrutements.spring.models.Ville"/>
+        <mapping class="com.irecrutements.spring.models.Role"/>
+    </session-factory>
+</hibernate-configuration>

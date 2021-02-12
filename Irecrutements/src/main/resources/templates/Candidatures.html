@@ -1,0 +1,162 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template1">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	
+</head>
+
+<body class="index-page">
+<section layout:fragment="content">
+	<div class="wrapper">
+		<div class="header header-filter" style="background-image: url('assets/img/bg5.jpg');">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="brand">
+							<h1>iRecrutements</h1>
+							<h3>Etes vous à la recherche d'un contrat CDI, CDD, Freelance, ou Stage de Pré-Embauche ? </h3>
+							<h3>iRecrutements sera votre compagnon idéal !</h3>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+		
+		<div class="main main-raised">
+	    	<div class="container">
+		    	<div class="section text-center section-landing">
+		    	<form id="nomform" class="form"  method="post" th:action="@{rechercherCandidatures}">
+					<div class="row">
+<!-- 						<div class="container"> -->
+<!-- 							<form th:action="@{/villes}" method="get" id="form-1"> -->
+<!-- 								<label>Mot clé :</label> <input type="text" name="motCle" /> -->
+<!-- 								<button type="submit" class="btn btn-primary">Chercher</button> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
+						<div class="col-md-8 col-md-offset-2">
+	                        <h2 class="title">Demandes récentes</h2>
+	                    </div>
+						<div class="col-md-12">
+                        	<nav class="navbar navbar-primary">
+	                        	<div class="container-fluid">
+	                        		
+		                            <div class="navbar-header">
+		                            	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-primary">
+			                                <span class="sr-only">Toggle navigation</span>
+			                                <span class="icon-bar"></span>
+			                                <span class="icon-bar"></span>
+<!-- 			                                <span class="icon-bar"></span> -->
+		                            	</button>
+		                            	<button name="rechercher" type="submit" class="btn btn-primary">Rechercher</button>
+<!-- 		                            	<a class="navbar-brand" th:href="@{/rechercherCandidatures}" >Rechercher</a> -->
+		                            </div>
+	
+		                            <div class="collapse navbar-collapse" id="example-navbar-primary">
+		                            		<ul class="nav navbar-nav navbar-right">
+		                            		<li>
+		                            			<select class="selectpicker btn-primary" data-live-search="true" name="typeCandidature">
+												  <option th:selected="${typeCandidature.equals('N''importe quelle catégorie')}" value="N'importe quelle catégorie">N'importe quelle catégorie</option>
+												  <option th:selected="${typeCandidature.equals('Stage de fin d''etude')}" value="Stage de fin d'etude">Stage de fin d'etude</option>
+												  <option th:selected="${typeCandidature.equals('Stage d''observation')}" value="Stage d'observation">Stage d'observation</option>
+												  <option th:selected="${typeCandidature.equals('Stage fonctionnel')}" value="Stage fonctionnel">Stage fonctionnel</option>
+												  <option th:selected="${typeCandidature.equals('Stage en alternance')}" value="Stage en alternance">Stage en alternance</option>
+												  <option th:selected="${typeCandidature.equals('FREELANCE')}" value="FREELANCE">FREELANCE</option>
+												  <option th:selected="${typeCandidature.equals('CDI')}" value="CDI">CDI</option>
+												  <option th:selected="${typeCandidature.equals('CDD')}" value="CDD">CDD</option>
+												  <option th:selected="${typeCandidature.equals('À PLEIN TEMPS')}" value="À PLEIN TEMPS">À PLEIN TEMPS</option>
+												</select>
+											</li>
+											<li>
+												<select name="villeCandidature"  class="selectpicker" data-live-search="true">
+												<option th:selected="${villeCandidature == 0}" value="0">N'importe quelle ville</option>
+										          <option th:selected="${villeCandidature == ville.idVille}" th:each="ville : ${villes}" th:value="${ville.idVille}" th:text="${ville.nomVille}"></option>
+										        </select>
+											</li>
+											<li>
+												<select name="domaine" class="selectpicker" data-live-search="true" data-live-search-placeholder="Search">
+												<option th:selected="${domaine == 0}"  value="0">N'importe quel domaine</option>
+												 <option th:selected="${domaine == domaine.idDomaine}" th:each="domaine : ${domaines}" th:value="${domaine.idDomaine}" th:text="${domaine.nomDomaine}"></option>
+												</select>
+											</li>
+											<li>
+												<input type="text" th:value="${motCle}" placeholder="mot clé" class="form-control btn-primary" name="motCle"/>
+											</li>
+		                            	</ul>
+		                            </div>
+		                            
+								</div>
+	                        </nav>
+	                    </div>
+						<div th:if="${candidatures != null}" th:each="candidature : ${candidatures}">
+		                    <div class="col-md-4">
+								<div class="info">
+									<div class="icon icon-primary">
+										<i class="material-icons">picture_in_picture</i>
+									</div>
+									<h4 class="info-title" th:text="${candidature.typeCandidature}"></h4>
+									<a rel="tooltip" title="Voir la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/voirCandidature(id=${candidature.idCandidature})}">
+										<p th:text="${candidature.intituleCandidature}"></p>
+									</a>
+								</div>
+		                    </div>
+	                    </div>
+	                </div>
+					<div class="container">
+						<ul class="pagination pagination-primary">
+							<li th:each="p, status:${pages}" 
+								th:class="${status.index==pageCourante}?'active':''">
+
+									<button class="pagination pagination-primary" type="submit" name="page" th:value="${status.index}" th:text="${status.index + 1}"></button>
+<!-- 								<a th:href="@{/rechercherCandidatures(page=${status.index}, typeCandidature=${typeCandidature}, villeCandidature=${villeCandidature}, domaine=${domaine}, motCle=${motCle})}" th:method="post" th:text="${status.index + 1}"></a> -->
+							</li>
+						</ul>
+					</div>
+					</form>
+		    	</div>
+		    </div>
+		</div>
+		
+		<section layout:fragment="footer">
+		    <footer class="footer">
+			    <div class="container">
+<!-- 				        <nav class="pull-left"> -->
+<!-- 				            <ul> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://www.creative-tim.com"> -->
+<!-- 										Creative Tim -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://presentation.creative-tim.com"> -->
+<!-- 									   About Us -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://blog.creative-tim.com"> -->
+<!-- 									   Blog -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://www.creative-tim.com/license"> -->
+<!-- 										Licenses -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 				            </ul> -->
+<!-- 				        </nav> -->
+			        <div class="copyright pull-right">
+			            &copy; IRECRUTEMENTS — TOUS DROITS RÉSERVÉS, made with <i class="material-icons">favorite</i> by EDDAHBANI Zakariae and EL MOUNJIDE Hamza.
+			        </div>
+			    </div>
+			</footer>
+		</section>
+	</div>
+</section>
+
+</body>
+	
+</html>

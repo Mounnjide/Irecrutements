@@ -1,0 +1,117 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template1">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	
+</head>
+
+<body class="index-page">
+<section layout:fragment="content">
+	<div class="wrapper">
+		<div class="header header-filter" style="background-image: url('assets/img/bg5.jpg');">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="brand">
+							<h1>iRecrutements</h1>
+							<h3>Etes vous à la recherche d'un contrat CDI, CDD, Freelance, ou Stage de Pré-Embauche ? </h3>
+							<h3>iRecrutements sera votre compagnon idéal !</h3>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+		
+		<div class="main main-raised">
+	    	<div class="container">
+		    	<div class="section text-center section-landing">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+	                        <h2 class="title">Demandes récentes</h2>
+	                    </div>
+	                    
+						<div th:if="${candidatures != null}" th:each="candidature : ${candidatures}">
+		                    <div class="col-md-4">
+								<div class="info">
+									<div class="icon icon-primary">
+										<i class="material-icons">picture_in_picture</i>
+									</div>
+									<h4 class="info-title" th:text="${candidature.typeCandidature}"></h4>
+									<a rel="tooltip" title="Voir la candidature" data-placement="bottom" style="cursor:pointer" th:href="@{/voirCandidature(id=${candidature.idCandidature})}">
+										<p th:text="${candidature.intituleCandidature}"></p>
+									</a>
+								</div>
+		                    </div>
+	                    </div>
+	                </div>
+	                    <a th:href="@{/rechercherCandidatures}" class="btn btn-primary" role="button">Afficher plus</a>
+	                
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+	                        <h2 class="title">Offres récentes</h2>
+	                    </div>
+	                    
+						<div th:if="${offres != null}"  th:each="offre : ${offres}">
+		                    <div class="col-md-4">
+								<div class="info">
+									<div class="icon icon-primary">
+										<i class="material-icons">picture_in_picture</i>
+									</div>
+									<h4 class="info-title" th:text="${offre.typeOffre}"></h4>
+									<a rel="tooltip" title="Voir l'offre" data-placement="bottom" style="cursor:pointer" th:href="@{/voirOffre(id=${offre.idOffre})}">
+										<p th:text="${offre.intituleOffre + ' à ' + offre.villeOffre.nomVille}"></p>
+									</a>
+								</div>
+		                    </div>
+	                    </div>
+	                </div>
+	                    <a th:href="@{/rechercherOffres}" class="btn btn-primary" role="button">Afficher plus</a>
+	                
+		    	</div>
+		    </div>
+		</div>
+		
+		<section layout:fragment="footer">
+		    <footer class="footer">
+			    <div class="container">
+<!-- 				        <nav class="pull-left"> -->
+<!-- 				            <ul> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://www.creative-tim.com"> -->
+<!-- 										Creative Tim -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://presentation.creative-tim.com"> -->
+<!-- 									   About Us -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://blog.creative-tim.com"> -->
+<!-- 									   Blog -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://www.creative-tim.com/license"> -->
+<!-- 										Licenses -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 				            </ul> -->
+<!-- 				        </nav> -->
+			        <div class="copyright pull-right">
+			            &copy; IRECRUTEMENTS — TOUS DROITS RÉSERVÉS, made with <i class="material-icons">favorite</i> by EDDAHBANI Zakariae and EL MOUNJIDE Hamza.
+			        </div>
+			    </div>
+			</footer>
+		</section>
+	</div>
+</section>
+
+</body>
+	
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template1">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+	<title>Se connecter iRecrutements</title>
+
+
+	<link rel="icon" type="image/png" href="assets/img/logoIrecrutements.png" />
+	
+</head>
+
+<body class="login-page">
+	
+	<section layout:fragment="content">
+		<div class="wrapper">
+			
+			<div class="header header-filter" style="background-image: url('assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+				<div class="container">
+				
+					
+					<div class="row">
+						<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+						<div class="space-110"></div>
+						<div class="space-110"></div>
+							<div class="card card-signup">
+								<form class="form" th:action="@{/login}" method="post">
+									<div class="header header-primary text-center">
+										<h4>Se connecter</h4>
+										<div class="social-line">
+<!-- 											<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+<!-- 												<i class="fa fa-facebook-square"></i> -->
+<!-- 											</a> -->
+<!-- 											<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+<!-- 												<i class="fa fa-twitter"></i> -->
+<!-- 											</a> -->
+<!-- 											<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+<!-- 												<i class="fa fa-google-plus"></i> -->
+<!-- 											</a> -->
+										</div>
+									</div>
+										<div class="text-divider" th:if="${param.error}" >
+											<span class="label label-warning">Incorrect username or password</span>
+										</div>
+										<div class="text-divider" th:if="${param.logout}" >
+											<span class="label label-warning">You have been logged out</span>
+										</div>
+<!-- 									<p class="text-divider">Or Be Classical</p> -->
+									<div class="content">
+	
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="material-icons">email</i>
+											</span>
+											<input type="text" class="form-control" placeholder="Email..." name="username"/>
+										</div>
+	
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="material-icons">lock_outline</i>
+											</span>
+											<input type="password" placeholder="Password..." class="form-control" name="password"/>
+										</div>
+									</div>
+									<div class="footer text-center">
+<!-- 										<a href="#pablo" class="btn btn-simple btn-primary btn-lg">Se connecter</a> -->
+										<button type="submit" class="btn btn-simple btn-primary btn-lg">Se connecter</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="space-110"></div>
+					<div class="space-110"></div>
+					<div class="space-110"></div>
+				</div>
+				
+				<section layout:fragment="footer">	
+				    <footer class="footer">
+					    <div class="container">
+	<!-- 				        <nav class="pull-left"> -->
+	<!-- 				            <ul> -->
+	<!-- 								<li> -->
+	<!-- 									<a href="http://www.creative-tim.com"> -->
+	<!-- 										Creative Tim -->
+	<!-- 									</a> -->
+	<!-- 								</li> -->
+	<!-- 								<li> -->
+	<!-- 									<a href="http://presentation.creative-tim.com"> -->
+	<!-- 									   About Us -->
+	<!-- 									</a> -->
+	<!-- 								</li> -->
+	<!-- 								<li> -->
+	<!-- 									<a href="http://blog.creative-tim.com"> -->
+	<!-- 									   Blog -->
+	<!-- 									</a> -->
+	<!-- 								</li> -->
+	<!-- 								<li> -->
+	<!-- 									<a href="http://www.creative-tim.com/license"> -->
+	<!-- 										Licenses -->
+	<!-- 									</a> -->
+	<!-- 								</li> -->
+	<!-- 				            </ul> -->
+	<!-- 				        </nav> -->
+					        <div class="copyright pull-right">
+					            &copy; IRECRUTEMENTS — TOUS DROITS RÉSERVÉS, made with <i class="material-icons">favorite</i> by EDDAHBANI Zakariae and EL MOUNJIDE Hamza.
+					        </div>
+					    </div>
+					</footer>
+				</section>
+			</div>
+	
+	    </div>
+	</section>
+	
+</body>
+	
+</html>

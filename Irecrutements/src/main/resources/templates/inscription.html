@@ -1,0 +1,196 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template1">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+	<title>Inscription iRecrutements</title>
+
+
+	<link rel="icon" type="image/png" href="assets/img/logoIrecrutements.png" />
+	
+</head>
+
+<body class="index-page">
+
+	<section layout:fragment="content">
+		<div class="wrapper">
+			
+				<div class="header header-filter" style="background-image: url('assets/img/bg5.jpg');">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								<div class="brand">
+									<h1>iRecrutements</h1>
+									<h3>Etes vous à la recherche d'un contrat CDI, CDD, Freelance, ou Stage de Pré-Embauche ? </h3>
+									<h3>iRecrutements sera votre compagnon idéal !</h3>
+								</div>
+							</div>
+						</div>
+			
+					</div>
+				</div>
+			
+				<div class="main main-raised">
+				                <div class="card card-signup">
+									<form class="form" method="post" th:action="@{/save}">
+									
+										<div class="header header-primary text-center" >
+											<h4>Inscription </h4>
+<!-- 											<div class="social-line"> -->
+<!-- 												<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+<!-- 													<i class="fa fa-facebook-square"></i> -->
+<!-- 												</a> -->
+<!-- 												<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+<!-- 													<i class="fa fa-twitter"></i> -->
+<!-- 												</a> -->
+<!-- 												<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+<!-- 													<i class="fa fa-google-plus"></i> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+										</div>
+										
+										
+										<p class="text-divider">Information de base</p>
+										<div class="content">
+											<div class="input-group col-sm-8 text-center" >
+												<!-- start -->
+												<div>
+											        <select class="selectpicker" data-live-search="true" name="civiliteUtilisateur">
+													  <option value="Mr">Mr</option>
+													  <option value="Mme">Mme</option>
+													  <option value="Mlle">Mlle</option>
+													</select>
+												</div>
+												<!-- end -->
+										
+												<span class="input-group-addon">
+													<i class="material-icons">face</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">NOM :</label>
+													<input type="text" class="form-control" name="nomUtilisateur" />
+												</div>
+												
+												
+												<span class="input-group-addon">
+													<i class="material-icons">face</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">PRÉNOM :</label>
+													<input type="text" class="form-control" name="prenomUtilisateur" />
+												</div>
+												
+											</div>
+		
+											<div class="input-group">
+										
+												<span class="input-group-addon">
+													<i class="material-icons">email</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">ADRESSE E-MAIL :</label>
+													<input type="email" class="form-control" name="emailUtilisateur"/>
+												</div>
+												
+												
+												<span class="input-group-addon">
+													<i class="material-icons">lock_outline</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">MOT DE PASSE :</label>
+													<input type="password" class="form-control" name="pwdUtilisateur" />
+												</div>
+												
+												
+												<span class="input-group-addon">
+													<i class="material-icons">lock_outline</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">Confirmation :</label>
+													<input type="password" class="form-control" name="pwdConfirmation"/>
+												</div>
+												
+											</div>
+											
+											<div class="input-group">
+										
+												<span class="input-group-addon">
+													<i class="material-icons">explore</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">ADRESSE :</label>
+													<input type="text" class="form-control" name="adresse" />
+												</div>
+												
+												
+												<span class="input-group-addon">
+													<i class="material-icons">phone_iphone</i>
+												</span>
+												<div class="form-group label-floating">
+													<label class="control-label">TELEPHONE :</label>
+<!-- 													<input type="tel" class="form-control" /> -->
+													
+													<input type="tel" class="form-control" name="telephone" />
+												</div>
+												
+												
+											</div>
+											<!--  here -->
+											
+										</div>
+										<div class="footer text-center">
+<!-- 											<a class="btn btn-simple btn-primary btn-lg">S'enregistrer</a> -->
+												<button type="submit" class="btn btn-primary">S'enregistrer</button>
+<!-- 												<button type="submit" class="btn btn-simple btn-primary btn-lg">S'enregistrer</button> -->
+										</div>
+									</form>
+								</div>
+<!-- 				            </div> -->
+<!-- 				    	</div> -->
+<!-- 				    </div> -->
+				</div>
+			
+			<section layout:fragment="footer">
+				
+			    <footer class="footer">
+				    <div class="container">
+<!-- 				        <nav class="pull-left"> -->
+<!-- 				            <ul> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://www.creative-tim.com"> -->
+<!-- 										Creative Tim -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://presentation.creative-tim.com"> -->
+<!-- 									   About Us -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://blog.creative-tim.com"> -->
+<!-- 									   Blog -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="http://www.creative-tim.com/license"> -->
+<!-- 										Licenses -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 				            </ul> -->
+<!-- 				        </nav> -->
+				        <div class="copyright pull-right">
+				            &copy; IRECRUTEMENTS — TOUS DROITS RÉSERVÉS, made with <i class="material-icons">favorite</i> by EDDAHBANI Zakariae and EL MOUNJIDE Hamza.
+				        </div>
+				    </div>
+				</footer>
+			</section>
+		</div>
+	</section>
+
+</body>
+	
+</html>

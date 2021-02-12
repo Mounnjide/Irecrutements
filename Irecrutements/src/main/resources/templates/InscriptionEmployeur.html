@@ -1,0 +1,334 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template1">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+		name='viewport' />
+
+	<title>Inscription iRecrutements</title>
+
+
+	<link rel="icon" type="image/png" href="assets/img/logoIrecrutements.png" />
+
+	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+	<script src="assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	function checkPass()
+	{
+	    var pass1 = document.getElementById('pwdUtilisateur');
+	    var pass2 = document.getElementById('pwdConfirmation');
+	    var message = document.getElementById('confirmMessage');
+	    var goodColor = "#66cc66";
+	    var badColor = "#ff6666";
+	    if(pass1.value == pass2.value){
+	        pass2.style.backgroundColor = goodColor;
+	        message.style.color = goodColor;
+	        message.innerHTML = ""
+	    }else{
+	        pass2.style.backgroundColor = badColor;
+	        message.style.color = badColor;
+	        message.innerHTML = "Retaper le même mot de passe"
+	    }
+	}  
+	</script>
+</head>
+
+<body class="index-page">
+
+	<section layout:fragment="content">
+		<div class="wrapper">
+
+			<div class="header header-filter"
+				style="background-image: url('assets/img/bg5.jpg');">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<div class="brand">
+								<h1>iRecrutements</h1>
+								<h3>Etes vous à la recherche d'un contrat CDI, CDD,
+									Freelance, ou Stage de Pré-Embauche ?</h3>
+								<h3>iRecrutements sera votre compagnon idéal !</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="main main-raised">
+				<div class="card card-signup">
+					<form class="form" method="post" th:action="@{saveEmployeur}">
+						<div class="header header-primary text-center">
+							<h4>Inscription</h4>
+							<!-- 											<div class="social-line"> -->
+							<!-- 												<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+							<!-- 													<i class="fa fa-facebook-square"></i> -->
+							<!-- 												</a> -->
+							<!-- 												<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+							<!-- 													<i class="fa fa-twitter"></i> -->
+							<!-- 												</a> -->
+							<!-- 												<a href="#pablo" class="btn btn-simple btn-just-icon"> -->
+							<!-- 													<i class="fa fa-google-plus"></i> -->
+							<!-- 												</a> -->
+							<!-- 											</div> -->
+						</div>
+
+
+						<p class="text-divider">Information de base</p>
+						<div th:if="${emailExiste != ''}" class="section text-center section-landing">
+							<span class="label label-warning" th:text="${emailExiste}"></span>
+						</div>
+						<div class="container">
+							<div class="section text-center section-landing">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-2">
+										<div class="input-group-addon">
+											<div class="col-md-6">
+												<select class="selectpicker" data-live-search="true" name="civiliteUtilisateur">
+													<option value="Mr">Mr</option>
+													<option value="Mme">Mme</option>
+													<option value="Mlle">Mlle</option>
+												</select> <span class="label label-warning" th:errors="${employeur.civiliteUtilisateur}"></span>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group">
+													<span class="input-group-addon"> <i class="material-icons">face</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">NOM :</label> 
+														<input
+															type="text" class="form-control" name="nomUtilisateur"
+															th:value="${employeur.nomUtilisateur}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.nomUtilisateur}"></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group">
+													<span class="input-group-addon"> <i
+														class="material-icons">face</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">PRÉNOM :</label> <input
+															type="text" class="form-control" name="prenomUtilisateur"
+															th:value="${employeur.prenomUtilisateur}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.prenomUtilisateur}"></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group ">
+
+													<span class="input-group-addon"> <i
+														class="material-icons">email</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">ADRESSE E-MAIL :</label> 
+														<input
+															type="email" class="form-control" name="emailUtilisateur"
+															th:value="${employeur.emailUtilisateur}" /> 
+														<span 
+															class="label label-warning"
+															th:errors="${employeur.emailUtilisateur}"></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group ">
+
+
+													<span class="input-group-addon"> <i
+														class="material-icons">lock_outline</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">MOT DE PASSE :</label> 
+														<input id="pwdUtilisateur"
+															type="password" class="form-control"
+															name="pwdUtilisateur" required="required"
+															th:value="${employeur.pwdUtilisateur}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.pwdUtilisateur}"></span>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">lock_outline</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">Confirmation :</label> 
+														<input id="pwdConfirmation"
+															type="password" class="form-control"
+															name="pwdConfirmation" required="required"
+															onkeyup="checkPass(); return false;"/> 
+															<span id="confirmMessage" class="label label-warning confirmMessage"></span>
+															<span
+															class="label label-warning"
+															th:errors="${employeur.pwdUtilisateur}"></span>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">explore</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">ADRESSE :</label> <input
+															type="text" class="form-control" name="adresse"
+															th:value="${employeur.adresse}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.adresse}"></span>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">phone_iphone</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">TELEPHONE :</label>
+														<input type="tel" class="form-control" name="telephone"
+															th:value="${employeur.telephone}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.telephone}"></span>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">explore</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">Informations sur l'entreprise :</label> 
+														<input
+															type="text" class="form-control" name="infoEntreprise"
+															th:value="${employeur.infoEntreprise}" /> 
+															<span
+															class="label label-warning"
+															th:errors="${employeur.infoEntreprise}"></span>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">school</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">Site web de l'entreprise :</label>
+														 <input type="text" class="form-control"
+															name="siteWeb"
+															th:value="${employeur.siteWeb}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.siteWeb}"></span>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">school</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">Facebook de l'entreprise :</label>
+														 <input type="text" class="form-control"
+															name="facebookEntreprise"
+															th:value="${employeur.facebookEntreprise}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.facebookEntreprise}"></span>
+													</div>
+
+												</div>
+											</div>
+											
+											<div class="col-md-6">
+												<div class="input-group ">
+													<span class="input-group-addon"> <i
+														class="material-icons">school</i>
+													</span>
+													<div class="form-group label-floating">
+														<label class="control-label">Linkedin de l'entreprise :</label>
+														 <input type="text" class="form-control"
+															name="linkedinEntreprise"
+															th:value="${employeur.linkedinEntreprise}" /> <span
+															class="label label-warning"
+															th:errors="${employeur.linkedinEntreprise}"></span>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="footer text-center">
+							<button type="submit" class="btn btn-primary">S'enregistrer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<section layout:fragment="footer">
+
+				<footer class="footer">
+					<div class="container">
+						<!-- 				        <nav class="pull-left"> -->
+						<!-- 				            <ul> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://www.creative-tim.com"> -->
+						<!-- 										Creative Tim -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://presentation.creative-tim.com"> -->
+						<!-- 									   About Us -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://blog.creative-tim.com"> -->
+						<!-- 									   Blog -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 								<li> -->
+						<!-- 									<a href="http://www.creative-tim.com/license"> -->
+						<!-- 										Licenses -->
+						<!-- 									</a> -->
+						<!-- 								</li> -->
+						<!-- 				            </ul> -->
+						<!-- 				        </nav> -->
+						<div class="copyright pull-right">
+							&copy; IRECRUTEMENTS — TOUS DROITS RÉSERVÉS, made with <i
+								class="material-icons">favorite</i> by EDDAHBANI Zakariae and EL
+							MOUNJIDE Hamza.
+						</div>
+					</div>
+				</footer>
+			</section>
+		</div>
+	</section>
+
+</body>
+
+</html>
